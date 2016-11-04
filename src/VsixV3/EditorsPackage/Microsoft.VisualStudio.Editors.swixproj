@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <UseVisualStudioVersion>true</UseVisualStudioVersion>
+  </PropertyGroup>
+
   <Import Project="..\..\..\build\Targets\ProducesNoOutput.Settings.targets" />
   <Import Project="..\..\..\build\Targets\VSL.Versions.targets" />
 
@@ -9,7 +13,6 @@
     <OutputType>manifest</OutputType>
     <IsPackage>true</IsPackage>
     <OutputName>Microsoft.VisualStudio.Editors</OutputName>
-    <UseVisualStudioVersion>true</UseVisualStudioVersion>
   </PropertyGroup>
 
   <Import Project="$(NuGetPackageRoot)\MicroBuild.Core\$(MicroBuildVersion)\build\MicroBuild.Core.props" />
