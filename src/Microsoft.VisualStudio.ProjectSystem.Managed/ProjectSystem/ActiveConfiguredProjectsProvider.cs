@@ -120,19 +120,21 @@ namespace Microsoft.VisualStudio.ProjectSystem
             if (activeSolutionConfiguration == null)
                 return null;
 
-            IImmutableSet<ProjectConfiguration> configurations = await _services.ProjectConfigurationsService.GetKnownProjectConfigurationsAsync()
-                                                                                                             .ConfigureAwait(false);
+            // IImmutableSet<ProjectConfiguration> configurations = await _services.ProjectConfigurationsService.GetKnownProjectConfigurationsAsync()
+            //                                                                                                  .ConfigureAwait(false);
 
-            ImmutableArray<ProjectConfiguration>.Builder builder = ImmutableArray.CreateBuilder<ProjectConfiguration>(configurations.Count);
+            ImmutableArray<ProjectConfiguration>.Builder builder = ImmutableArray.CreateBuilder<ProjectConfiguration>(1);
             IImmutableSet<string> dimensionNames = GetDimensionNames();
 
-            foreach (ProjectConfiguration configuration in configurations)
-            {
-                if (IsActiveConfigurationCandidate(activeSolutionConfiguration, configuration, dimensionNames))
-                {
-                    builder.Add(configuration);
-                }
-            }
+            builder.Add(_project.Services.ActiveConfiguredProjectProvider.ActiveProjectConfiguration);
+
+            // foreach (ProjectConfiguration configuration in configurations)
+            // {
+            //     if (IsActiveConfigurationCandidate(activeSolutionConfiguration, configuration, dimensionNames))
+            //     {
+            //         builder.Add(configuration);
+            //     }
+            // }
 
             Assumes.True(builder.Count > 0, "We have an active configuration that isn't one of the known configurations");
             return new ActiveConfiguredObjects<ProjectConfiguration>(builder.ToImmutable(), dimensionNames);

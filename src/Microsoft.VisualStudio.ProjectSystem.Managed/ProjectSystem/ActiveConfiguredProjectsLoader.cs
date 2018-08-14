@@ -55,17 +55,19 @@ namespace Microsoft.VisualStudio.ProjectSystem
             }
         }
 
-        private async Task OnActiveConfigurationsChanged(IProjectVersionedValue<IConfigurationGroup<ProjectConfiguration>> e)
+        private Task OnActiveConfigurationsChanged(IProjectVersionedValue<IConfigurationGroup<ProjectConfiguration>> e)
         {
-            foreach (ProjectConfiguration configuration in e.Value)
-            {
-                // Make sure we aren't currently unloading, or we don't unload while we load the configuration
-                await _tasksService.LoadedProjectAsync(() =>
-                {
-                    return _project.LoadConfiguredProjectAsync(configuration);
+            // foreach (ProjectConfiguration configuration in e.Value)
+            // {
+            //     // Make sure we aren't currently unloading, or we don't unload while we load the configuration
+            //     await _tasksService.LoadedProjectAsync(() =>
+            //     {
+            //         return _project.LoadConfiguredProjectAsync(configuration);
 
-                }).ConfigureAwait(false);
-            }
+            //     }).ConfigureAwait(false);
+            // }
+
+            return Task.CompletedTask;
         }
     }
 }
