@@ -92,10 +92,10 @@ namespace Microsoft.VisualStudio.ProjectSystem.LanguageServices
             if (IsDisposing || IsDisposed)
                 return Task.CompletedTask;
 
-            _unconfiguredProjectTasksService.PrioritizedProjectLoadedInHostAsync(() =>
-            {
-                return UpdateProjectContextAndSubscriptionsAsync();
-            }).Forget();
+            // _unconfiguredProjectTasksService.PrioritizedProjectLoadedInHostAsync(() =>
+            // {
+            //     return UpdateProjectContextAndSubscriptionsAsync();
+            // }).Forget();
 
             return Task.CompletedTask;
         }
